@@ -33,6 +33,26 @@ spec:
       volumes:
       - name: "restify-volume-1"
         emptyDir: {}
+      initContainers:
+      - name: wait-for-mongodb
+        image: 'docker.io/library/busybox:latest'
+        command:
+        - /bin/sh
+        - -c
+        - |
+          echo "MongoDB service found! Testing connectivity..."
+          until timeout 5 telnet mongodb 27017 </dev/null; do
+            echo "MongoDB not accepting connections, sleeping..."
+            sleep 3
+          done
+          echo "MongoDB is ready!"
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "50m"
+          limits:
+            memory: "64Mi"
+            cpu: "100m"
       containers:
       - name: restify
         image: library/restify:latest

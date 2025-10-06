@@ -33,8 +33,9 @@ IMAGE_NAME="todolist-mongo-go"
 IMAGE_TAG="${VERSION_TAG}"
 
 # Base image name
-BASE_IMAGE_NAME="${IMAGE}"
-# Create a multi-architecture manifest
+BASE_IMAGE_NAME="${MANIFEST_NAME}"
+# Create a multi-architecture manifest (remove if exists)
+podman manifest rm ${MANIFEST_NAME}:${VERSION_TAG} 2>/dev/null || true
 podman manifest create ${MANIFEST_NAME}:${VERSION_TAG}
 
 for arch in arm64 amd64; do
@@ -57,8 +58,8 @@ done
 
 # Publish images to the registry
 if [[ "$SHOULD_PUBLISH" -eq 1 ]]; then
-  podman push --all "${MANIFEST_NAME}:${VERSION_TAG}" \
-    "docker://$BASE_IMAGE_NAME"
+  podman manifest push --all "${MANIFEST_NAME}:${VERSION_TAG}" \
+    "docker://${MANIFEST_NAME}:${VERSION_TAG}"
 fi
 
 podman manifest inspect "${MANIFEST_NAME}:${VERSION_TAG}"

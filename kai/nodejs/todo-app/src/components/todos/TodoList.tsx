@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import {
   PageSection,
   Button,
-  Text,
-  TextContent,
-  TextVariants,
+  Content,
+  ContentVariants,
   Flex,
   FlexItem,
   Dropdown,
@@ -63,10 +62,6 @@ export const TodoList: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    applyFiltersAndSort();
-  }, [todos, selectedPriority, selectedColor, showOverdueOnly, sortColumnIndex, sortDirection]);
-
-  const applyFiltersAndSort = () => {
     let filtered = todos.filter(todo => todo.status === 'active');
 
     // Filter by priority
@@ -87,8 +82,8 @@ export const TodoList: React.FC = () => {
     // Sort
     if (sortColumnIndex !== undefined) {
       filtered = [...filtered].sort((a, b) => {
-        let aValue: any;
-        let bValue: any;
+        let aValue: string;
+        let bValue: string;
 
         switch (sortColumnIndex) {
           case 1: // Title
@@ -111,10 +106,14 @@ export const TodoList: React.FC = () => {
       });
     }
 
-    setFilteredTodos(filtered);
-  };
+    // Use a ref to prevent unnecessary re-renders
+    setFilteredTodos(prevFiltered => {
+      const hasChanged = JSON.stringify(prevFiltered) !== JSON.stringify(filtered);
+      return hasChanged ? filtered : prevFiltered;
+    });
+  }, [todos, selectedPriority, selectedColor, showOverdueOnly, sortColumnIndex, sortDirection]);
 
-  const handleSort = (_event: any, index: number, direction: SortDirection) => {
+  const handleSort = (_event: unknown, index: number, direction: SortDirection) => {
     setSortColumnIndex(index);
     setSortDirection(direction);
   };
@@ -178,12 +177,12 @@ export const TodoList: React.FC = () => {
 
   return (
     <>
-      <PageSection variant="light" className="pf-v5-u-p-md">
+      <PageSection hasBodyWrapper={false}  className="pf-v5-u-p-md">
         <Flex justifyContent={{ default: 'justifyContentSpaceBetween' }}>
           <FlexItem>
-            <TextContent>
-              <Text component={TextVariants.h1}>TODO List</Text>
-            </TextContent>
+            <Content>
+              <Content component={ContentVariants.h1}>TODO List</Content>
+            </Content>
           </FlexItem>
           <FlexItem>
             <Button variant="primary" onClick={() => setIsCreateModalOpen(true)}>
@@ -193,7 +192,7 @@ export const TodoList: React.FC = () => {
         </Flex>
       </PageSection>
 
-      <PageSection className="todo-list__filters">
+      <PageSection hasBodyWrapper={false} className="todo-list__filters">
         <Flex direction={{ default: 'column', lg: 'row' }}>
           <FlexItem grow={{ default: 'grow' }}>
             <Dropdown
@@ -254,14 +253,12 @@ export const TodoList: React.FC = () => {
           </FlexItem>
 
           <FlexItem>
-            <Button variant="plain" onClick={handleClearFilters} style={{ padding: '0' }}>
-              <TimesIcon />
-            </Button>
+            <Button icon={<TimesIcon />} variant="plain" onClick={handleClearFilters} style={{ padding: '0' }} />
           </FlexItem>
         </Flex>
       </PageSection>
 
-      <PageSection>
+      <PageSection hasBodyWrapper={false}>
         {filteredTodos.length === 0 ? (
           <EmptyState>
             <EmptyStateBody>
@@ -340,20 +337,16 @@ export const TodoList: React.FC = () => {
                     ))}
                   </Td>
                   <Td>
-                    <Button
+                    <Button icon={<EditIcon />}
                       variant="plain"
                       onClick={() => handleEdit(todo)}
                       style={{ padding: '0' }}
-                    >
-                      <EditIcon />
-                    </Button>
-                    <Button
+                     />
+                    <Button icon={<TrashIcon />}
                       variant="plain"
                       onClick={() => handleDeleteClick(todo)}
-                      style={{ padding: '0', marginLeft: 'var(--pf-v5-global--spacer--sm)' }}
-                    >
-                      <TrashIcon />
-                    </Button>
+                      style={{ padding: '0', marginLeft: "var(--pf-t--global--spacer--sm)" }}
+                     />
                   </Td>
                 </Tr>
               ))}

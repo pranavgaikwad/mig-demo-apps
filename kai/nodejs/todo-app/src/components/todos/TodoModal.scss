@@ -1,20 +1,20 @@
 .todo-modal {
   &__header {
-    padding: var(--pf-v5-global--spacer--md);
-    border-bottom: var(--pf-v5-global--BorderWidth--sm) solid
-      var(--pf-v5-global--BorderColor--100);
+    padding: var(--pf-v6-global--spacer--md);
+    border-bottom: var(--pf-v6-global--BorderWidth--sm) solid
+      var(--pf-v6-global--BorderColor--100);
   }
 
   &__body {
-    padding: var(--pf-v5-global--spacer--md);
+    padding: var(--pf-v6-global--spacer--md);
     max-height: 70vh;
     overflow-y: auto;
   }
 
   &__footer {
-    padding: var(--pf-v5-global--spacer--md);
-    border-top: var(--pf-v5-global--BorderWidth--sm) solid
-      var(--pf-v5-global--BorderColor--100);
+    padding: var(--pf-v6-global--spacer--md);
+    border-top: var(--pf-v6-global--BorderWidth--sm) solid
+      var(--pf-v6-global--BorderColor--100);
   }
 }
 
@@ -28,6 +28,6 @@
   }
 
   &.pf-m-selected {
-    border-color: var(--pf-v5-global--active-color--100);
+    border-color: var(--pf-v6-global--active-color--100);
   }
 }

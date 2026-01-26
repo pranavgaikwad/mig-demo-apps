@@ -1,19 +1,19 @@
 .todo-list {
   &__filters {
-    padding: var(--pf-v5-global--spacer--md);
-    background-color: var(--pf-v5-global--BackgroundColor--light-100);
-    border-bottom: var(--pf-v5-global--BorderWidth--sm) solid
-      var(--pf-v5-global--BorderColor--100);
+    padding: var(--pf-v6-global--spacer--md);
+    background-color: var(--pf-v6-global--BackgroundColor--light-100);
+    border-bottom: var(--pf-v6-global--BorderWidth--sm) solid
+      var(--pf-v6-global--BorderColor--100);
 
-    @media (max-width: var(--pf-v5-global--breakpoint--md)) {
-      padding: var(--pf-v5-global--spacer--sm);
+    @media (max-width: var(--pf-v6-global--breakpoint--md)) {
+      padding: var(--pf-v6-global--spacer--sm);
     }
   }
 }
 
 .overdue-row {
-  border-left: var(--pf-v5-global--BorderWidth--lg) solid
-    var(--pf-v5-global--danger-color--100);
+  border-left: var(--pf-v6-global--BorderWidth--lg) solid
+    var(--pf-v6-global--danger-color--100);
 
   td {
     background-color: rgba(201, 25, 11, 0.05);
@@ -22,11 +22,11 @@
 
 .todo-actions {
   display: flex;
-  gap: var(--pf-v5-global--spacer--sm);
+  gap: var(--pf-v6-global--spacer--sm);
 }
 
 // Ensure pixel breakpoints for migration testing
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .todo-list__filters {
     .pf-v5-c-flex {
       flex-direction: row;
@@ -36,7 +36,7 @@
 
 @media (max-width: 767px) {
   .todo-list__filters {
-    border-top: var(--pf-v5-global--BorderWidth--sm) solid
-      var(--pf-v5-global--BorderColor--100);
+    border-top: var(--pf-v6-global--BorderWidth--sm) solid
+      var(--pf-v6-global--BorderColor--100);
   }
 }

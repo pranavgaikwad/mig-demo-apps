@@ -1,0 +1,21 @@
+.app-nav {
+  background-color: var(--pf-v5-global--BackgroundColor--dark-100);
+  border-bottom: var(--pf-v5-global--BorderWidth--sm) solid
+    var(--pf-v5-global--BorderColor--100);
+
+  &__title {
+    color: var(--pf-v5-global--Color--light-100);
+    font-size: var(--pf-v5-global--FontSize--xl);
+    font-weight: var(--pf-v5-global--FontWeight--bold);
+    margin: 0;
+  }
+}
+
+// Pixel breakpoints for migration testing
+@media (max-width: 767px) {
+  .app-nav {
+    &__title {
+      font-size: var(--pf-v5-global--FontSize--lg);
+    }
+  }
+}

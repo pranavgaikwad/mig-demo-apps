@@ -1,0 +1,56 @@
+{
+  "todos": [
+    {
+      "id": "todo-1",
+      "title": "Buy tickets to Taylor Swift concert",
+      "priority": "high",
+      "color": "blue",
+      "tags": ["personal"],
+      "status": "active",
+      "createdAt": "2026-01-16T10:00:00Z",
+      "updatedAt": "2026-01-16T10:00:00Z"
+    },
+    {
+      "id": "todo-2",
+      "title": "Keep trash out",
+      "priority": "medium",
+      "color": "green",
+      "targetDate": "01/12/2026",
+      "tags": ["chore"],
+      "status": "active",
+      "createdAt": "2026-01-16T10:05:00Z",
+      "updatedAt": "2026-01-16T10:05:00Z"
+    },
+    {
+      "id": "todo-3",
+      "title": "Refill prescriptions",
+      "priority": "high",
+      "color": "red",
+      "targetDate": "05/14/2026",
+      "tags": ["personal"],
+      "status": "active",
+      "createdAt": "2026-01-16T10:10:00Z",
+      "updatedAt": "2026-01-16T10:10:00Z"
+    },
+    {
+      "id": "todo-4",
+      "title": "Buy 4 tubs of chocolate ice cream",
+      "priority": "low",
+      "color": "blue",
+      "tags": ["kitchen"],
+      "status": "active",
+      "createdAt": "2026-01-16T10:15:00Z",
+      "updatedAt": "2026-01-16T10:15:00Z"
+    },
+    {
+      "id": "todo-5",
+      "title": "Install Fedora on the Windows laptop",
+      "priority": "high",
+      "color": "orange",
+      "tags": ["work"],
+      "status": "active",
+      "createdAt": "2026-01-16T10:20:00Z",
+      "updatedAt": "2026-01-16T10:20:00Z"
+    }
+  ]
+}

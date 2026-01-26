@@ -1,0 +1,35 @@
+import { Page, Locator } from '@playwright/test';
+
+export class DeleteModal {
+  readonly modal: Locator;
+  readonly modalTitle: Locator;
+  readonly deleteButton: Locator;
+  readonly cancelButton: Locator;
+  readonly todoTitleText: Locator;
+
+  constructor(private page: Page) {
+    this.modal = page.locator('.pf-v5-c-modal-box').filter({ hasText: 'Delete TODO' });
+    this.modalTitle = page.locator('[data-test-id="delete-modal-title"]');
+    this.deleteButton = page.getByRole('button', { name: 'Delete' });
+    this.cancelButton = page.getByRole('button', { name: 'Cancel' });
+    this.todoTitleText = page.locator('.delete-modal__body strong');
+  }
+
+  async waitForModal() {
+    await this.modal.waitFor({ state: 'visible' });
+  }
+
+  async confirmDelete() {
+    await this.deleteButton.click();
+    await this.modal.waitFor({ state: 'hidden' });
+  }
+
+  async cancelDelete() {
+    await this.cancelButton.click();
+    await this.modal.waitFor({ state: 'hidden' });
+  }
+
+  async getTodoTitle(): Promise<string> {
+    return await this.todoTitleText.textContent() || '';
+  }
+}

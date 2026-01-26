@@ -1,0 +1,22 @@
+/* Import PatternFly 5 styles */
+@import '@patternfly/patternfly/patternfly.css';
+@import '@patternfly/patternfly/patternfly-addons.css';
+
+/* Global resets */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--pf-v5-global--FontFamily--text);
+  font-size: var(--pf-v5-global--FontSize--md);
+  color: var(--pf-v5-global--Color--100);
+  background-color: var(--pf-v5-global--BackgroundColor--100);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}

@@ -1,0 +1,46 @@
+.dashboard {
+  &__header {
+    padding: var(--pf-v5-global--spacer--md);
+    border-bottom: var(--pf-v5-global--BorderWidth--sm) solid
+      var(--pf-v5-global--BorderColor--100);
+  }
+
+  &__stats-card {
+    text-align: center;
+
+    .stat-number {
+      font-size: var(--pf-v5-global--FontSize--4xl);
+      font-weight: var(--pf-v5-global--FontWeight--bold);
+    }
+  }
+
+  &__overdue-section {
+    margin-top: var(--pf-v5-global--spacer--lg);
+  }
+}
+
+.overdue-todo-item {
+  border-left: var(--pf-v5-global--BorderWidth--lg) solid
+    var(--pf-v5-global--danger-color--100);
+  padding-left: var(--pf-v5-global--spacer--sm);
+  margin-bottom: var(--pf-v5-global--spacer--sm);
+  background-color: rgba(201, 25, 11, 0.05);
+}
+
+// Pixel breakpoints for migration testing
+@media (min-width: 768px) {
+  .dashboard {
+    &__stats-card {
+      max-width: 100%;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .dashboard {
+    &__header {
+      border-top: var(--pf-v5-global--BorderWidth--sm) solid
+        var(--pf-v5-global--BorderColor--100);
+    }
+  }
+}

@@ -2,17 +2,15 @@ import { useState, useEffect } from 'react';
 import {
   Modal,
   Button,
-  Text,
-  TextContent,
-  TextVariants,
+  Content,
+  ContentVariants,
   Form,
   FormGroup,
   TextInput,
   TextArea,
   DatePicker,
-  Tile,
-  Flex,
-  FlexItem,
+  ToggleGroup,
+  ToggleGroupItem,
   FormHelperText,
   HelperText,
   HelperTextItem,
@@ -143,11 +141,9 @@ export const TodoModal: React.FC<TodoModalProps> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="todo-modal__header">
-        <TextContent>
-          <Text component={TextVariants.h1} data-test-id="modal-title">
-            {isEdit ? 'Edit TODO' : 'Create New TODO'}
-          </Text>
-        </TextContent>
+        <Content component={ContentVariants.h1} data-test-id="modal-title">
+          {isEdit ? 'Edit TODO' : 'Create New TODO'}
+        </Content>
       </div>
 
       <div className="todo-modal__body">
@@ -202,34 +198,31 @@ export const TodoModal: React.FC<TodoModalProps> = ({
             </FormHelperText>
           </FormGroup>
 
-          {/* Priority - OPTIONAL - Using Tiles */}
+          {/* Priority - OPTIONAL - Using ToggleGroup */}
           <FormGroup label="Priority" fieldId="todo-priority">
-            <Flex>
-              <FlexItem span={3}>
-                <Tile
-                  title="High"
-                  onClick={() => handleFieldChange('priority', 'high')}
-                  isSelected={formData.priority === 'high'}
-                  data-test="priority-high"
-                />
-              </FlexItem>
-              <FlexItem span={3}>
-                <Tile
-                  title="Medium"
-                  onClick={() => handleFieldChange('priority', 'medium')}
-                  isSelected={formData.priority === 'medium'}
-                  data-test="priority-medium"
-                />
-              </FlexItem>
-              <FlexItem span={3}>
-                <Tile
-                  title="Low"
-                  onClick={() => handleFieldChange('priority', 'low')}
-                  isSelected={formData.priority === 'low'}
-                  data-test="priority-low"
-                />
-              </FlexItem>
-            </Flex>
+            <ToggleGroup aria-label="Priority selection">
+              <ToggleGroupItem
+                text="High"
+                buttonId="priority-high"
+                isSelected={formData.priority === 'high'}
+                onChange={() => handleFieldChange('priority', formData.priority === 'high' ? undefined : 'high')}
+                data-test="priority-high"
+              />
+              <ToggleGroupItem
+                text="Medium"
+                buttonId="priority-medium"
+                isSelected={formData.priority === 'medium'}
+                onChange={() => handleFieldChange('priority', formData.priority === 'medium' ? undefined : 'medium')}
+                data-test="priority-medium"
+              />
+              <ToggleGroupItem
+                text="Low"
+                buttonId="priority-low"
+                isSelected={formData.priority === 'low'}
+                onChange={() => handleFieldChange('priority', formData.priority === 'low' ? undefined : 'low')}
+                data-test="priority-low"
+              />
+            </ToggleGroup>
             <FormHelperText>
               <HelperText>
                 <HelperTextItem>Optional: Select priority level</HelperTextItem>
@@ -237,27 +230,27 @@ export const TodoModal: React.FC<TodoModalProps> = ({
             </FormHelperText>
           </FormGroup>
 
-          {/* Color - OPTIONAL - Using Tiles */}
+          {/* Color - OPTIONAL - Using ToggleGroup */}
           <FormGroup label="Color Label" fieldId="todo-color">
-            <Flex>
+            <ToggleGroup aria-label="Color label selection">
               {(['red', 'orange', 'blue', 'green', 'purple', 'gray'] as const).map(color => (
-                <FlexItem key={color} span={2}>
-                  <Tile
-                    title={COLOR_TOKENS[color].label}
-                    onClick={() => handleFieldChange('color', color)}
-                    isSelected={formData.color === color}
-                    data-test={`color-${color}`}
-                    style={{
-                      backgroundColor: formData.color === color
-                        ? COLOR_TOKENS[color].background
-                        : 'transparent',
-                      border: `var(--pf-v5-global--BorderWidth--sm) solid ${COLOR_TOKENS[color].background}`,
-                      color: formData.color === color ? '#ffffff' : COLOR_TOKENS[color].background
-                    }}
-                  />
-                </FlexItem>
+                <ToggleGroupItem
+                  key={color}
+                  text={COLOR_TOKENS[color].label}
+                  buttonId={`color-${color}`}
+                  isSelected={formData.color === color}
+                  onChange={() => handleFieldChange('color', formData.color === color ? undefined : color)}
+                  data-test={`color-${color}`}
+                  style={{
+                    backgroundColor: formData.color === color
+                      ? COLOR_TOKENS[color].background
+                      : 'transparent',
+                    border: `var(--pf-t--global--border--width--regular) solid ${COLOR_TOKENS[color].background}`,
+                    color: formData.color === color ? '#ffffff' : COLOR_TOKENS[color].background
+                  }}
+                />
               ))}
-            </Flex>
+            </ToggleGroup>
             <FormHelperText>
               <HelperText>
                 <HelperTextItem>Optional: Choose a color label for this TODO</HelperTextItem>

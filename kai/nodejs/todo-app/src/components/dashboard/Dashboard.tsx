@@ -8,9 +8,8 @@ import {
   CardTitle,
   CardBody,
   Button,
-  Text,
-  TextContent,
-  TextVariants,
+  Content,
+  Title,
   Flex,
   FlexItem,
   DataList,
@@ -99,12 +98,12 @@ export const Dashboard: React.FC = () => {
 
   return (
     <>
-      <PageSection variant="light" className="dashboard__header">
+      <PageSection variant="default" className="dashboard__header">
         <Flex justifyContent={{ default: 'justifyContentSpaceBetween' }}>
           <FlexItem>
-            <TextContent>
-              <Text component={TextVariants.h1}>TODO Dashboard</Text>
-            </TextContent>
+            <Content>
+              <Title headingLevel="h1">TODO Dashboard</Title>
+            </Content>
           </FlexItem>
           <FlexItem>
             <Button variant="primary" onClick={() => setIsCreateModalOpen(true)}>
@@ -120,16 +119,15 @@ export const Dashboard: React.FC = () => {
           <GridItem xl={4} lg={4} md={4} sm={12}>
             <Card className="dashboard__stats-card">
               <CardTitle>
-                <Text component={TextVariants.h3}>Total TODOs</Text>
+                <Title headingLevel="h3">Total TODOs</Title>
               </CardTitle>
               <CardBody>
-                <Text
-                  component={TextVariants.h1}
+                <Title
+                  headingLevel="h1"
                   className="stat-number"
-                  style={{ fontSize: 'var(--pf-v5-global--FontSize--4xl)' }}
                 >
                   {totalCount}
-                </Text>
+                </Title>
               </CardBody>
             </Card>
           </GridItem>
@@ -137,19 +135,16 @@ export const Dashboard: React.FC = () => {
           <GridItem xl={4} lg={4} md={4} sm={12}>
             <Card className="dashboard__stats-card">
               <CardTitle>
-                <Text component={TextVariants.h3}>Overdue TODOs</Text>
+                <Title headingLevel="h3">Overdue TODOs</Title>
               </CardTitle>
               <CardBody>
-                <Text
-                  component={TextVariants.h1}
+                <Title
+                  headingLevel="h1"
                   className="stat-number"
-                  style={{
-                    fontSize: 'var(--pf-v5-global--FontSize--4xl)',
-                    color: 'var(--pf-v5-global--danger-color--100)'
-                  }}
+                  style={{ color: 'var(--pf-t--global--color--status--danger--default)' }}
                 >
                   {overdueCount}
-                </Text>
+                </Title>
               </CardBody>
             </Card>
           </GridItem>
@@ -157,19 +152,16 @@ export const Dashboard: React.FC = () => {
           <GridItem xl={4} lg={4} md={4} sm={12}>
             <Card className="dashboard__stats-card">
               <CardTitle>
-                <Text component={TextVariants.h3}>Completed Today</Text>
+                <Title headingLevel="h3">Completed Today</Title>
               </CardTitle>
               <CardBody>
-                <Text
-                  component={TextVariants.h1}
+                <Title
+                  headingLevel="h1"
                   className="stat-number"
-                  style={{
-                    fontSize: 'var(--pf-v5-global--FontSize--4xl)',
-                    color: 'var(--pf-v5-global--success-color--100)'
-                  }}
+                  style={{ color: 'var(--pf-t--global--color--status--success--default)' }}
                 >
                   {completedTodayCount}
-                </Text>
+                </Title>
               </CardBody>
             </Card>
           </GridItem>
@@ -178,13 +170,13 @@ export const Dashboard: React.FC = () => {
           <GridItem xl={12} lg={12} md={12} sm={12}>
             <Card className="dashboard__overdue-section">
               <CardTitle>
-                <Text component={TextVariants.h2}>Overdue TODOs</Text>
+                <Title headingLevel="h2">Overdue TODOs</Title>
               </CardTitle>
               <CardBody>
                 {top5Overdue.length === 0 ? (
-                  <TextContent>
-                    <Text>No overdue TODOs</Text>
-                  </TextContent>
+                  <Content>
+                    <p>No overdue TODOs</p>
+                  </Content>
                 ) : (
                   <DataList aria-label="Overdue todos">
                     {top5Overdue.map(todo => (
@@ -201,11 +193,9 @@ export const Dashboard: React.FC = () => {
                                 />
                               </DataListCell>,
                               <DataListCell key="title" width={3}>
-                                <TextContent>
-                                  <Text component={TextVariants.p}>
-                                    <strong>{todo.title}</strong>
-                                  </Text>
-                                </TextContent>
+                                <Content>
+                                  <p><strong>{todo.title}</strong></p>
+                                </Content>
                               </DataListCell>,
                               <DataListCell key="priority" width={1}>
                                 {todo.priority && (
@@ -227,7 +217,7 @@ export const Dashboard: React.FC = () => {
                                 )}
                               </DataListCell>,
                               <DataListCell key="date" width={1}>
-                                <Text>{todo.targetDate}</Text>
+                                {todo.targetDate}
                               </DataListCell>
                             ]}
                           />
@@ -236,7 +226,7 @@ export const Dashboard: React.FC = () => {
                     ))}
                   </DataList>
                 )}
-                <div style={{ marginTop: 'var(--pf-v5-global--spacer--md)' }}>
+                <div style={{ marginTop: 'var(--pf-t--global--spacer--300)' }}>
                   <Button variant="link" onClick={() => navigate('/todos')}>
                     View All TODOs
                   </Button>
@@ -249,7 +239,7 @@ export const Dashboard: React.FC = () => {
           <GridItem xl={12} lg={12} md={12} sm={12}>
             <Card>
               <CardTitle>
-                <Text component={TextVariants.h2}>Quick Create TODO</Text>
+                <Title headingLevel="h2">Quick Create TODO</Title>
               </CardTitle>
               <CardBody>
                 {!isQuickCreateExpanded ? (

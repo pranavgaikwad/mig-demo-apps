@@ -8,9 +8,8 @@ import {
   ToolbarContent,
   ToolbarItem,
   Button,
-  Text,
-  TextContent,
-  TextVariants
+  Content,
+  Title
 } from '@patternfly/react-core';
 import './AppNav.scss';
 
@@ -25,11 +24,11 @@ export const AppNav: React.FC = () => {
     <Masthead className="app-nav">
       <MastheadMain>
         <MastheadBrand>
-          <TextContent>
-            <Text component={TextVariants.h1} className="app-nav__title">
+          <Content>
+            <Title headingLevel="h1" className="app-nav__title">
               TODO Application
-            </Text>
-          </TextContent>
+            </Title>
+          </Content>
         </MastheadBrand>
       </MastheadMain>
       <MastheadContent>

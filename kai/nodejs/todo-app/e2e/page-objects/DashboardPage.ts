@@ -100,12 +100,12 @@ export class DashboardPage extends BasePage {
 
     const overdueItems: OverdueItem[] = [];
     for (const item of items) {
-      const title = await item.locator('strong').textContent() || '';
-      const priorityLabel = item.locator('.pf-v5-c-label').first();
-      const priority = await priorityLabel.isVisible()
-        ? await priorityLabel.textContent()
-        : undefined;
 
+      const title = await item.locator('strong').textContent() || '';
+      const priorityLabel = item.locator('.pf-v6-c-label').first();
+      const priority = await priorityLabel.isVisible()
+        ? await priorityLabel.textContent() || ''
+        : '';
       overdueItems.push({
         title: title.trim(),
         priority: priority?.toLowerCase(),

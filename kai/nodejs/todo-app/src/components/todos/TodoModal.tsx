@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react';
 import {
   Modal,
   Button,
-  Text,
-  TextContent,
-  TextVariants,
+  Content,
+  Title,
   Form,
   FormGroup,
   TextInput,
   TextArea,
   DatePicker,
-  Tile,
+  Card,
+  CardBody,
   Flex,
   FlexItem,
   FormHelperText,
@@ -143,11 +143,11 @@ export const TodoModal: React.FC<TodoModalProps> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="todo-modal__header">
-        <TextContent>
-          <Text component={TextVariants.h1} data-test-id="modal-title">
+        <Content>
+          <Title headingLevel="h1" data-test-id="modal-title">
             {isEdit ? 'Edit TODO' : 'Create New TODO'}
-          </Text>
-        </TextContent>
+          </Title>
+        </Content>
       </div>
 
       <div className="todo-modal__body">
@@ -202,32 +202,44 @@ export const TodoModal: React.FC<TodoModalProps> = ({
             </FormHelperText>
           </FormGroup>
 
-          {/* Priority - OPTIONAL - Using Tiles */}
+          {/* Priority - OPTIONAL - Using Card-based selection */}
           <FormGroup label="Priority" fieldId="todo-priority">
             <Flex>
               <FlexItem span={3}>
-                <Tile
-                  title="High"
-                  onClick={() => handleFieldChange('priority', 'high')}
+                <Card
+                  isClickable
+                  isSelectable
                   isSelected={formData.priority === 'high'}
+                  onClick={() => handleFieldChange('priority', 'high')}
                   data-test="priority-high"
-                />
+                  className="todo-modal__selection-card"
+                >
+                  <CardBody>High</CardBody>
+                </Card>
               </FlexItem>
               <FlexItem span={3}>
-                <Tile
-                  title="Medium"
-                  onClick={() => handleFieldChange('priority', 'medium')}
+                <Card
+                  isClickable
+                  isSelectable
                   isSelected={formData.priority === 'medium'}
+                  onClick={() => handleFieldChange('priority', 'medium')}
                   data-test="priority-medium"
-                />
+                  className="todo-modal__selection-card"
+                >
+                  <CardBody>Medium</CardBody>
+                </Card>
               </FlexItem>
               <FlexItem span={3}>
-                <Tile
-                  title="Low"
-                  onClick={() => handleFieldChange('priority', 'low')}
+                <Card
+                  isClickable
+                  isSelectable
                   isSelected={formData.priority === 'low'}
+                  onClick={() => handleFieldChange('priority', 'low')}
                   data-test="priority-low"
-                />
+                  className="todo-modal__selection-card"
+                >
+                  <CardBody>Low</CardBody>
+                </Card>
               </FlexItem>
             </Flex>
             <FormHelperText>
@@ -237,24 +249,28 @@ export const TodoModal: React.FC<TodoModalProps> = ({
             </FormHelperText>
           </FormGroup>
 
-          {/* Color - OPTIONAL - Using Tiles */}
+          {/* Color - OPTIONAL - Using Card-based selection */}
           <FormGroup label="Color Label" fieldId="todo-color">
             <Flex>
               {(['red', 'orange', 'blue', 'green', 'purple', 'gray'] as const).map(color => (
                 <FlexItem key={color} span={2}>
-                  <Tile
-                    title={COLOR_TOKENS[color].label}
-                    onClick={() => handleFieldChange('color', color)}
+                  <Card
+                    isClickable
+                    isSelectable
                     isSelected={formData.color === color}
+                    onClick={() => handleFieldChange('color', color)}
                     data-test={`color-${color}`}
+                    className="todo-modal__selection-card"
                     style={{
                       backgroundColor: formData.color === color
                         ? COLOR_TOKENS[color].background
                         : 'transparent',
-                      border: `var(--pf-v5-global--BorderWidth--sm) solid ${COLOR_TOKENS[color].background}`,
+                      border: `var(--pf-t--global--border--width--control--default) solid ${COLOR_TOKENS[color].background}`,
                       color: formData.color === color ? '#ffffff' : COLOR_TOKENS[color].background
                     }}
-                  />
+                  >
+                    <CardBody>{COLOR_TOKENS[color].label}</CardBody>
+                  </Card>
                 </FlexItem>
               ))}
             </Flex>

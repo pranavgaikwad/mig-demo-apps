@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import {
   PageSection,
   Button,
-  Text,
-  TextContent,
-  TextVariants,
+  Content,
+  Title,
   Flex,
   FlexItem,
   Dropdown,
@@ -178,12 +177,12 @@ export const TodoList: React.FC = () => {
 
   return (
     <>
-      <PageSection variant="light" className="pf-v5-u-p-md">
+      <PageSection variant="default" className="pf-v5-u-p-md">
         <Flex justifyContent={{ default: 'justifyContentSpaceBetween' }}>
           <FlexItem>
-            <TextContent>
-              <Text component={TextVariants.h1}>TODO List</Text>
-            </TextContent>
+            <Content>
+              <Title headingLevel="h1">TODO List</Title>
+            </Content>
           </FlexItem>
           <FlexItem>
             <Button variant="primary" onClick={() => setIsCreateModalOpen(true)}>
@@ -334,7 +333,7 @@ export const TodoList: React.FC = () => {
                   <Td>{todo.targetDate || '-'}</Td>
                   <Td>
                     {todo.tags.map(tag => (
-                      <Label key={tag} className="pf-v5-u-mr-xs">
+                      <Label key={tag} style={{ marginRight: 'var(--pf-t--global--spacer--100)' }}>
                         {tag}
                       </Label>
                     ))}
@@ -350,7 +349,7 @@ export const TodoList: React.FC = () => {
                     <Button
                       variant="plain"
                       onClick={() => handleDeleteClick(todo)}
-                      style={{ padding: '0', marginLeft: 'var(--pf-v5-global--spacer--sm)' }}
+                      style={{ padding: '0', marginLeft: 'var(--pf-t--global--spacer--200)' }}
                     >
                       <TrashIcon />
                     </Button>

@@ -1,23 +1,27 @@
 import { useState, useEffect } from 'react';
 import {
-  Modal,
-  Button,
-  Text,
-  TextContent,
-  TextVariants,
-  Form,
-  FormGroup,
-  TextInput,
-  TextArea,
-  DatePicker,
-  Tile,
-  Flex,
-  FlexItem,
-  FormHelperText,
-  HelperText,
-  HelperTextItem,
-  ActionGroup
+	Button,
+	Content,
+	ContentVariants,
+	Form,
+	FormGroup,
+	TextInput,
+	TextArea,
+	DatePicker,
+	Flex,
+	FlexItem,
+	FormHelperText,
+	HelperText,
+	HelperTextItem,
+	ActionGroup,
+	Modal,
+	ModalHeader,
+	ModalBody,
+	ModalFooter
 } from '@patternfly/react-core';
+import {
+	Tile
+} from '@patternfly/react-core/deprecated';
 import type { Todo, TodoFormData } from '../../types/todo';
 import { COLOR_TOKENS } from '../../utils/colorUtils';
 import { isValidDate, convertToMMDDYYYY } from '../../utils/dateUtils';
@@ -142,15 +146,15 @@ export const TodoModal: React.FC<TodoModalProps> = ({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="todo-modal__header">
-        <TextContent>
-          <Text component={TextVariants.h1} data-test-id="modal-title">
+      <ModalHeader>
+        <Content>
+          <Content component={ContentVariants.h1} data-test-id="modal-title">
             {isEdit ? 'Edit TODO' : 'Create New TODO'}
-          </Text>
-        </TextContent>
-      </div>
+          </Content>
+        </Content>
+      </ModalHeader>
 
-      <div className="todo-modal__body">
+      <ModalBody>
         <Form onSubmit={handleSubmit}>
           {/* Title - REQUIRED */}
           <FormGroup label="Title" fieldId="todo-title" isRequired>
@@ -251,7 +255,7 @@ export const TodoModal: React.FC<TodoModalProps> = ({
                       backgroundColor: formData.color === color
                         ? COLOR_TOKENS[color].background
                         : 'transparent',
-                      border: `var(--pf-v5-global--BorderWidth--sm) solid ${COLOR_TOKENS[color].background}`,
+                      border: `var(--pf-t--global--border--width--regular) solid ${COLOR_TOKENS[color].background}`,
                       color: formData.color === color ? '#ffffff' : COLOR_TOKENS[color].background
                     }}
                   />
@@ -281,9 +285,9 @@ export const TodoModal: React.FC<TodoModalProps> = ({
             </FormHelperText>
           </FormGroup>
         </Form>
-      </div>
+      </ModalBody>
 
-      <div className="todo-modal__footer">
+      <ModalFooter>
         <ActionGroup>
           <Button
             variant="primary"
@@ -299,7 +303,7 @@ export const TodoModal: React.FC<TodoModalProps> = ({
             Reset
           </Button>
         </ActionGroup>
-      </div>
+      </ModalFooter>
     </Modal>
   );
 };

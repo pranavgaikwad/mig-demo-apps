@@ -1,19 +1,19 @@
 .delete-modal {
   &__header {
-    padding: var(--pf-v5-global--spacer--md);
-    border-bottom: var(--pf-v5-global--BorderWidth--sm) solid
-      var(--pf-v5-global--BorderColor--100);
+    padding: var(--pf-t--global--spacer--md);
+    border-bottom: var(--pf-t--global--border--width--regular) solid
+      var(--pf-t--global--border--color--default);
   }
 
   &__body {
-    padding: var(--pf-v5-global--spacer--md);
+    padding: var(--pf-t--global--spacer--md);
   }
 
   &__footer {
-    padding: var(--pf-v5-global--spacer--md);
-    border-top: var(--pf-v5-global--BorderWidth--sm) solid
-      var(--pf-v5-global--BorderColor--100);
+    padding: var(--pf-t--global--spacer--md);
+    border-top: var(--pf-t--global--border--width--regular) solid
+      var(--pf-t--global--border--color--default);
     display: flex;
-    gap: var(--pf-v5-global--spacer--sm);
+    gap: var(--pf-t--global--spacer--sm);
   }
 }

@@ -27,6 +27,7 @@ test.describe('Persistence', () => {
     expect(titles).toContain('Persistent TODO 2');
 
     await page.reload();
+    await page.waitForTimeout(1000);
 
     titles = await todoListPage.getTodoTitles();
     expect(titles).toContain('Persistent TODO 1');

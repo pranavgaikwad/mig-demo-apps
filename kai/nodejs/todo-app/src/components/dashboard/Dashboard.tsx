@@ -8,9 +8,7 @@ import {
   CardTitle,
   CardBody,
   Button,
-  Text,
-  TextContent,
-  TextVariants,
+  Content,
   Flex,
   FlexItem,
   DataList,
@@ -99,12 +97,12 @@ export const Dashboard: React.FC = () => {
 
   return (
     <>
-      <PageSection variant="light" className="dashboard__header">
+      <PageSection variant="secondary" className="dashboard__header">
         <Flex justifyContent={{ default: 'justifyContentSpaceBetween' }}>
           <FlexItem>
-            <TextContent>
-              <Text component={TextVariants.h1}>TODO Dashboard</Text>
-            </TextContent>
+            <Content>
+              <h1>TODO Dashboard</h1>
+            </Content>
           </FlexItem>
           <FlexItem>
             <Button variant="primary" onClick={() => setIsCreateModalOpen(true)}>
@@ -120,16 +118,19 @@ export const Dashboard: React.FC = () => {
           <GridItem xl={4} lg={4} md={4} sm={12}>
             <Card className="dashboard__stats-card">
               <CardTitle>
-                <Text component={TextVariants.h3}>Total TODOs</Text>
+                <Content>
+                  <h3>Total TODOs</h3>
+                </Content>
               </CardTitle>
               <CardBody>
-                <Text
-                  component={TextVariants.h1}
-                  className="stat-number"
-                  style={{ fontSize: 'var(--pf-v5-global--FontSize--4xl)' }}
-                >
-                  {totalCount}
-                </Text>
+                <Content>
+                  <h1
+                    className="stat-number"
+                    style={{ fontSize: 'var(--pf-t--global--font--size--heading--h1)' }}
+                  >
+                    {totalCount}
+                  </h1>
+                </Content>
               </CardBody>
             </Card>
           </GridItem>
@@ -137,19 +138,22 @@ export const Dashboard: React.FC = () => {
           <GridItem xl={4} lg={4} md={4} sm={12}>
             <Card className="dashboard__stats-card">
               <CardTitle>
-                <Text component={TextVariants.h3}>Overdue TODOs</Text>
+                <Content>
+                  <h3>Overdue TODOs</h3>
+                </Content>
               </CardTitle>
               <CardBody>
-                <Text
-                  component={TextVariants.h1}
-                  className="stat-number"
-                  style={{
-                    fontSize: 'var(--pf-v5-global--FontSize--4xl)',
-                    color: 'var(--pf-v5-global--danger-color--100)'
-                  }}
-                >
-                  {overdueCount}
-                </Text>
+                <Content>
+                  <h1
+                    className="stat-number"
+                    style={{
+                      fontSize: 'var(--pf-t--global--font--size--heading--h1)',
+                      color: 'var(--pf-t--global--text--color--status--danger--default)'
+                    }}
+                  >
+                    {overdueCount}
+                  </h1>
+                </Content>
               </CardBody>
             </Card>
           </GridItem>
@@ -157,19 +161,22 @@ export const Dashboard: React.FC = () => {
           <GridItem xl={4} lg={4} md={4} sm={12}>
             <Card className="dashboard__stats-card">
               <CardTitle>
-                <Text component={TextVariants.h3}>Completed Today</Text>
+                <Content>
+                  <h3>Completed Today</h3>
+                </Content>
               </CardTitle>
               <CardBody>
-                <Text
-                  component={TextVariants.h1}
-                  className="stat-number"
-                  style={{
-                    fontSize: 'var(--pf-v5-global--FontSize--4xl)',
-                    color: 'var(--pf-v5-global--success-color--100)'
-                  }}
-                >
-                  {completedTodayCount}
-                </Text>
+                <Content>
+                  <h1
+                    className="stat-number"
+                    style={{
+                      fontSize: 'var(--pf-t--global--font--size--heading--h1)',
+                      color: 'var(--pf-t--global--text--color--status--success--default)'
+                    }}
+                  >
+                    {completedTodayCount}
+                  </h1>
+                </Content>
               </CardBody>
             </Card>
           </GridItem>
@@ -178,13 +185,15 @@ export const Dashboard: React.FC = () => {
           <GridItem xl={12} lg={12} md={12} sm={12}>
             <Card className="dashboard__overdue-section">
               <CardTitle>
-                <Text component={TextVariants.h2}>Overdue TODOs</Text>
+                <Content>
+                  <h2>Overdue TODOs</h2>
+                </Content>
               </CardTitle>
               <CardBody>
                 {top5Overdue.length === 0 ? (
-                  <TextContent>
-                    <Text>No overdue TODOs</Text>
-                  </TextContent>
+                  <Content>
+                    <p>No overdue TODOs</p>
+                  </Content>
                 ) : (
                   <DataList aria-label="Overdue todos">
                     {top5Overdue.map(todo => (
@@ -201,11 +210,11 @@ export const Dashboard: React.FC = () => {
                                 />
                               </DataListCell>,
                               <DataListCell key="title" width={3}>
-                                <TextContent>
-                                  <Text component={TextVariants.p}>
+                                <Content>
+                                  <p>
                                     <strong>{todo.title}</strong>
-                                  </Text>
-                                </TextContent>
+                                  </p>
+                                </Content>
                               </DataListCell>,
                               <DataListCell key="priority" width={1}>
                                 {todo.priority && (
@@ -227,7 +236,7 @@ export const Dashboard: React.FC = () => {
                                 )}
                               </DataListCell>,
                               <DataListCell key="date" width={1}>
-                                <Text>{todo.targetDate}</Text>
+                                <Content>{todo.targetDate}</Content>
                               </DataListCell>
                             ]}
                           />
@@ -236,7 +245,7 @@ export const Dashboard: React.FC = () => {
                     ))}
                   </DataList>
                 )}
-                <div style={{ marginTop: 'var(--pf-v5-global--spacer--md)' }}>
+                <div style={{ marginTop: 'var(--pf-t--global--spacer--md)' }}>
                   <Button variant="link" onClick={() => navigate('/todos')}>
                     View All TODOs
                   </Button>
@@ -249,7 +258,9 @@ export const Dashboard: React.FC = () => {
           <GridItem xl={12} lg={12} md={12} sm={12}>
             <Card>
               <CardTitle>
-                <Text component={TextVariants.h2}>Quick Create TODO</Text>
+                <Content>
+                  <h2>Quick Create TODO</h2>
+                </Content>
               </CardTitle>
               <CardBody>
                 {!isQuickCreateExpanded ? (

@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import {
   PageSection,
   Button,
-  Text,
-  TextContent,
-  TextVariants,
+  Content,
   Flex,
   FlexItem,
   Dropdown,
@@ -18,7 +16,7 @@ import {
   EmptyStateBody
 } from '@patternfly/react-core';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@patternfly/react-table';
-import { EditIcon, TrashIcon, TimesIcon } from '@patternfly/react-icons';
+import { EditIcon, TrashIcon, TimesIcon, EllipsisVIcon } from '@patternfly/react-icons';
 import type { Todo } from '../../types/todo';
 import { TodoModal } from './TodoModal';
 import { DeleteConfirmationModal } from './DeleteConfirmationModal';
@@ -178,12 +176,12 @@ export const TodoList: React.FC = () => {
 
   return (
     <>
-      <PageSection variant="light" className="pf-v5-u-p-md">
+      <PageSection variant="secondary" className="pf-v6-u-p-md">
         <Flex justifyContent={{ default: 'justifyContentSpaceBetween' }}>
           <FlexItem>
-            <TextContent>
-              <Text component={TextVariants.h1}>TODO List</Text>
-            </TextContent>
+            <Content>
+              <h1>TODO List</h1>
+            </Content>
           </FlexItem>
           <FlexItem>
             <Button variant="primary" onClick={() => setIsCreateModalOpen(true)}>
@@ -204,6 +202,8 @@ export const TodoList: React.FC = () => {
                   ref={toggleRef}
                   onClick={() => setIsPriorityOpen(!isPriorityOpen)}
                   isExpanded={isPriorityOpen}
+                  icon={<EllipsisVIcon />}
+                  variant="plain"
                 >
                   Priority: {selectedPriority === 'all' ? 'All' : selectedPriority.charAt(0).toUpperCase() + selectedPriority.slice(1)}
                 </MenuToggle>
@@ -254,9 +254,7 @@ export const TodoList: React.FC = () => {
           </FlexItem>
 
           <FlexItem>
-            <Button variant="plain" onClick={handleClearFilters} style={{ padding: '0' }}>
-              <TimesIcon />
-            </Button>
+            <Button variant="plain" onClick={handleClearFilters} style={{ padding: '0' }} icon={<TimesIcon />} />
           </FlexItem>
         </Flex>
       </PageSection>
@@ -334,7 +332,7 @@ export const TodoList: React.FC = () => {
                   <Td>{todo.targetDate || '-'}</Td>
                   <Td>
                     {todo.tags.map(tag => (
-                      <Label key={tag} className="pf-v5-u-mr-xs">
+                      <Label key={tag} className="pf-v6-u-mr-xs">
                         {tag}
                       </Label>
                     ))}
@@ -344,16 +342,14 @@ export const TodoList: React.FC = () => {
                       variant="plain"
                       onClick={() => handleEdit(todo)}
                       style={{ padding: '0' }}
-                    >
-                      <EditIcon />
-                    </Button>
+                      icon={<EditIcon />}
+                    />
                     <Button
                       variant="plain"
                       onClick={() => handleDeleteClick(todo)}
-                      style={{ padding: '0', marginLeft: 'var(--pf-v5-global--spacer--sm)' }}
-                    >
-                      <TrashIcon />
-                    </Button>
+                      style={{ padding: '0', marginLeft: 'var(--pf-t--global--spacer--sm)' }}
+                      icon={<TrashIcon />}
+                    />
                   </Td>
                 </Tr>
               ))}

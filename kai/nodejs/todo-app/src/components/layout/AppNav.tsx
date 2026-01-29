@@ -3,14 +3,13 @@ import {
   Masthead,
   MastheadMain,
   MastheadBrand,
+  MastheadLogo,
   MastheadContent,
   Toolbar,
   ToolbarContent,
   ToolbarItem,
   Button,
-  Text,
-  TextContent,
-  TextVariants
+  Content
 } from '@patternfly/react-core';
 import './AppNav.scss';
 
@@ -25,11 +24,11 @@ export const AppNav: React.FC = () => {
     <Masthead className="app-nav">
       <MastheadMain>
         <MastheadBrand>
-          <TextContent>
-            <Text component={TextVariants.h1} className="app-nav__title">
-              TODO Application
-            </Text>
-          </TextContent>
+          <MastheadLogo>
+            <Content>
+              <h1 className="app-nav__title">TODO Application</h1>
+            </Content>
+          </MastheadLogo>
         </MastheadBrand>
       </MastheadMain>
       <MastheadContent>

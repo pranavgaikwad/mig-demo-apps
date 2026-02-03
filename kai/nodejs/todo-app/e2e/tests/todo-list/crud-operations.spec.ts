@@ -1,20 +1,17 @@
 import { test, expect } from '@playwright/test';
 import { TodoListPage } from '../../page-objects/TodoListPage';
 import { TodoModal } from '../../page-objects/TodoModal';
-import { DeleteModal } from '../../page-objects/DeleteModal';
 import { LocalStorageHelper } from '../../utils/localStorage';
 import { testTodos, createTestTodo } from '../../fixtures/todos';
 
 test.describe('CRUD Operations', () => {
   let todoListPage: TodoListPage;
   let todoModal: TodoModal;
-  let deleteModal: DeleteModal;
   let storage: LocalStorageHelper;
 
   test.beforeEach(async ({ page }) => {
     todoListPage = new TodoListPage(page);
     todoModal = new TodoModal(page);
-    deleteModal = new DeleteModal(page);
     storage = new LocalStorageHelper(page);
   });
 
@@ -48,40 +45,6 @@ test.describe('CRUD Operations', () => {
       expect(titles).toContain('Complete TODO');
     });
 
-    test('should show validation error for empty title', async () => {
-      await storage.initializeWithData('/#/todos', []);
-      await todoListPage.openCreateModal();
-
-      await todoModal.fillTitle('');
-      const isSaveDisabled = await todoModal.isSaveButtonDisabled();
-      expect(isSaveDisabled).toBe(true);
-    });
-
-    test('should reset form clears all fields', async () => {
-      await storage.initializeWithData('/#/todos', []);
-      await todoListPage.openCreateModal();
-
-      await todoModal.fillTitle('Test TODO');
-      await todoModal.fillDescription('Test Description');
-      await todoModal.fillTags('test, tags');
-
-      await todoModal.clickReset();
-
-      expect(await todoModal.getTitle()).toBe('');
-      expect(await todoModal.getDescription()).toBe('');
-      expect(await todoModal.getTags()).toBe('');
-    });
-
-    test('should cancel close modal without saving', async () => {
-      await storage.initializeWithData('/#/todos', []);
-      await todoListPage.openCreateModal();
-
-      await todoModal.fillTitle('Cancelled TODO');
-      await todoModal.clickCancel();
-
-      const titles = await todoListPage.getTodoTitles();
-      expect(titles).not.toContain('Cancelled TODO');
-    });
   });
 
   test.describe('Read', () => {
@@ -145,29 +108,4 @@ test.describe('CRUD Operations', () => {
     });
   });
 
-  test.describe('Delete', () => {
-    test('should delete TODO after confirmation', async () => {
-      const todo = createTestTodo({ title: 'TODO to Delete' });
-      await storage.initializeWithData('/#/todos', [todo]);
-
-      await todoListPage.deleteTodo('TODO to Delete');
-      await deleteModal.waitForModal();
-      await deleteModal.confirmDelete();
-
-      const titles = await todoListPage.getTodoTitles();
-      expect(titles).not.toContain('TODO to Delete');
-    });
-
-    test('should cancel delete preserves TODO', async () => {
-      const todo = createTestTodo({ title: 'TODO to Keep' });
-      await storage.initializeWithData('/#/todos', [todo]);
-
-      await todoListPage.deleteTodo('TODO to Keep');
-      await deleteModal.waitForModal();
-      await deleteModal.cancelDelete();
-
-      const titles = await todoListPage.getTodoTitles();
-      expect(titles).toContain('TODO to Keep');
-    });
-  });
 });

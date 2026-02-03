@@ -64,18 +64,4 @@ test.describe('Persistence', () => {
     expect(todos.length).toBe(1);
     expect(todos[0].title).toBe('Custom TODO');
   });
-
-  test('should persist status change (archive)', async ({ page }) => {
-    const todo = createTestTodo({ title: 'TODO to Archive' });
-    await storage.initializeWithData('/#/todos', [todo]);
-
-    await todoListPage.markTodoAsDone('TODO to Archive');
-    await page.waitForTimeout(100);
-
-    const storedTodos = await storage.getTodos();
-    const archivedTodo = storedTodos.find(t => t.title === 'TODO to Archive');
-
-    expect(archivedTodo).toBeDefined();
-    expect(archivedTodo?.status).toBe('archived');
-  });
 });

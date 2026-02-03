@@ -26,20 +26,16 @@ test.describe('Create Modal', () => {
     await storage.initializeWithData('/#/todos', []);
     await todoListPage.openCreateModal();
 
-    await todoModal.fillTitle('Valid Title');
+    // Initially save button should be disabled (empty title)
     let isSaveDisabled = await todoModal.isSaveButtonDisabled();
+    expect(isSaveDisabled).toBe(true);
+
+    await todoModal.fillTitle('Valid Title');
+    isSaveDisabled = await todoModal.isSaveButtonDisabled();
     expect(isSaveDisabled).toBe(false);
 
     await todoModal.fillTitle('');
     isSaveDisabled = await todoModal.isSaveButtonDisabled();
-    expect(isSaveDisabled).toBe(true);
-  });
-
-  test('should save button disabled when title is empty', async () => {
-    await storage.initializeWithData('/#/todos', []);
-    await todoListPage.openCreateModal();
-
-    const isSaveDisabled = await todoModal.isSaveButtonDisabled();
     expect(isSaveDisabled).toBe(true);
   });
 

@@ -13,39 +13,28 @@ test.describe('Todo List Filtering', () => {
     storage = new LocalStorageHelper(page);
   });
 
-  test('should filter by priority - High', async () => {
-    const todos = [
-      createTestTodo({ title: 'High Priority', priority: 'high' }),
-      createTestTodo({ title: 'Medium Priority', priority: 'medium' }),
-      createTestTodo({ title: 'Low Priority', priority: 'low' }),
-    ];
+  for (const priority of ['high', 'medium'] as const) {
+    test(`should filter by priority - ${priority}`, async () => {
+      const todos = [
+        createTestTodo({ title: 'High Priority', priority: 'high' }),
+        createTestTodo({ title: 'Medium Priority', priority: 'medium' }),
+        createTestTodo({ title: 'Low Priority', priority: 'low' }),
+      ];
 
-    await storage.initializeWithData('/#/todos', todos);
+      await storage.initializeWithData('/#/todos', todos);
 
-    await todoListPage.filterByPriority('high');
-    const titles = await todoListPage.getTodoTitles();
+      await todoListPage.filterByPriority(priority);
+      const titles = await todoListPage.getTodoTitles();
 
-    expect(titles).toContain('High Priority');
-    expect(titles).not.toContain('Medium Priority');
-    expect(titles).not.toContain('Low Priority');
-  });
+      const expectedTitle = priority === 'high' ? 'High Priority' : 'Medium Priority';
+      const excludedTitles = ['High Priority', 'Medium Priority', 'Low Priority'].filter(t => t !== expectedTitle);
 
-  test('should filter by priority - Medium', async () => {
-    const todos = [
-      createTestTodo({ title: 'High Priority', priority: 'high' }),
-      createTestTodo({ title: 'Medium Priority', priority: 'medium' }),
-      createTestTodo({ title: 'Low Priority', priority: 'low' }),
-    ];
-
-    await storage.initializeWithData('/#/todos', todos);
-
-    await todoListPage.filterByPriority('medium');
-    const titles = await todoListPage.getTodoTitles();
-
-    expect(titles).toContain('Medium Priority');
-    expect(titles).not.toContain('High Priority');
-    expect(titles).not.toContain('Low Priority');
-  });
+      expect(titles).toContain(expectedTitle);
+      for (const excluded of excludedTitles) {
+        expect(titles).not.toContain(excluded);
+      }
+    });
+  }
 
   test('should filter by color', async () => {
     const todos = [

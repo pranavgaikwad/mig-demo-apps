@@ -21,11 +21,11 @@ export class TodoModal {
   readonly resetButton: Locator;
 
   constructor(private page: Page) {
-    this.modal = page.locator('.pf-v5-c-modal-box');
+    this.modal = page.locator('.pf-v6-c-modal-box');
     this.modalTitle = page.locator('[data-test-id="modal-title"]');
     this.titleInput = page.locator('#todo-title');
     this.descriptionInput = page.locator('#todo-description');
-    this.dateInput = page.locator('.pf-v5-c-date-picker input').first();
+    this.dateInput = page.locator('.pf-v6-c-date-picker input').first();
     this.tagsInput = page.locator('#todo-tags');
     this.saveButton = page.getByRole('button', { name: /^(Create|Update)$/i });
     this.cancelButton = page.getByRole('button', { name: 'Cancel' });
@@ -116,7 +116,7 @@ export class TodoModal {
   }
 
   async getTitleError(): Promise<string | null> {
-    const errorElement = this.page.locator('.pf-v5-c-helper-text__item.pf-m-error');
+    const errorElement = this.page.locator('.pf-v6-c-helper-text__item.pf-m-error');
     const isVisible = await errorElement.isVisible().catch(() => false);
     return isVisible ? await errorElement.textContent() : null;
   }

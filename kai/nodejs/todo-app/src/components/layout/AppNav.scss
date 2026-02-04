@@ -1,21 +1,21 @@
 .app-nav {
-  background-color: var(--pf-v5-global--BackgroundColor--dark-100);
-  border-bottom: var(--pf-v5-global--BorderWidth--sm) solid
-    var(--pf-v5-global--BorderColor--100);
+  background-color: var(--pf-t--global--background--color--inverse--default);
+  border-bottom: var(--pf-t--global--border--width--regular) solid
+    var(--pf-t--global--border--color--default);
 
   &__title {
-    color: var(--pf-v5-global--Color--light-100);
-    font-size: var(--pf-v5-global--FontSize--xl);
-    font-weight: var(--pf-v5-global--FontWeight--bold);
+    color: var(--pf-t--global--text--color--on-brand--default);
+    font-size: var(--pf-t--global--font--size--heading--md);
+    font-weight: var(--pf-t--global--font--weight--body--bold);
     margin: 0;
   }
 }
 
 // Pixel breakpoints for migration testing
-@media (max-width: 767px) {
+@media (max-width: 47.9rem) {
   .app-nav {
     &__title {
-      font-size: var(--pf-v5-global--FontSize--lg);
+      font-size: var(--pf-t--global--font--size--body--lg);
     }
   }
 }

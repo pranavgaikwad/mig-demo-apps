@@ -1,22 +1,25 @@
 import { useState, useEffect } from 'react';
 import {
-  Modal,
-  Button,
-  Text,
-  TextContent,
-  TextVariants,
-  Form,
-  FormGroup,
-  TextInput,
-  TextArea,
-  DatePicker,
-  Tile,
-  Flex,
-  FlexItem,
-  FormHelperText,
-  HelperText,
-  HelperTextItem,
-  ActionGroup
+	Button,
+	Content,
+	ContentVariants,
+	Form,
+	FormGroup,
+	TextInput,
+	TextArea,
+	DatePicker,
+	Flex,
+	FlexItem,
+	FormHelperText,
+	HelperText,
+	HelperTextItem,
+	ActionGroup,
+	Card,
+	CardBody,
+	Modal,
+	ModalHeader,
+	ModalBody,
+	ModalFooter
 } from '@patternfly/react-core';
 import type { Todo, TodoFormData } from '../../types/todo';
 import { COLOR_TOKENS } from '../../utils/colorUtils';
@@ -49,22 +52,34 @@ export const TodoModal: React.FC<TodoModalProps> = ({
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
-    if (todo) {
-      setFormData({
-        title: todo.title,
-        description: todo.description || '',
-        targetDate: todo.targetDate || '',
-        priority: todo.priority,
-        color: todo.color,
-        tagsString: todo.tags.join(', ')
-      });
-    } else {
-      handleReset();
+    if (isOpen) {
+      if (todo) {
+        setFormData({
+          title: todo.title,
+          description: todo.description || '',
+          targetDate: todo.targetDate || '',
+          priority: todo.priority,
+          color: todo.color,
+          tagsString: todo.tags.join(', ')
+        });
+      } else {
+        setFormData({
+          title: '',
+          description: '',
+          targetDate: '',
+          priority: undefined,
+          color: undefined,
+          tagsString: ''
+        });
+      }
+      setErrors({});
     }
-  }, [todo, isOpen]);
+  }, [isOpen, todo]);
 
-  const handleFieldChange = (field: keyof TodoFormData, value: any) => {
+
+  const handleFieldChange = (field: keyof TodoFormData, value: string | undefined) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
@@ -122,18 +137,6 @@ export const TodoModal: React.FC<TodoModalProps> = ({
     onClose();
   };
 
-  const handleReset = () => {
-    setFormData({
-      title: '',
-      description: '',
-      targetDate: '',
-      priority: undefined,
-      color: undefined,
-      tagsString: ''
-    });
-    setErrors({});
-  };
-
   const handleDateChange = (value: string) => {
     // DatePicker may return different formats, normalize to MM/DD/YYYY
     const normalizedDate = convertToMMDDYYYY(value);
@@ -142,15 +145,15 @@ export const TodoModal: React.FC<TodoModalProps> = ({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="todo-modal__header">
-        <TextContent>
-          <Text component={TextVariants.h1} data-test-id="modal-title">
+      <ModalHeader>
+        <Content>
+          <Content component={ContentVariants.h1} data-test-id="modal-title">
             {isEdit ? 'Edit TODO' : 'Create New TODO'}
-          </Text>
-        </TextContent>
-      </div>
+          </Content>
+        </Content>
+      </ModalHeader>
 
-      <div className="todo-modal__body">
+      <ModalBody>
         <Form onSubmit={handleSubmit}>
           {/* Title - REQUIRED */}
           <FormGroup label="Title" fieldId="todo-title" isRequired>
@@ -202,32 +205,38 @@ export const TodoModal: React.FC<TodoModalProps> = ({
             </FormHelperText>
           </FormGroup>
 
-          {/* Priority - OPTIONAL - Using Tiles */}
+          {/* Priority - OPTIONAL - Using Cards */}
           <FormGroup label="Priority" fieldId="todo-priority">
             <Flex>
               <FlexItem span={3}>
-                <Tile
-                  title="High"
+                <Card
                   onClick={() => handleFieldChange('priority', 'high')}
+                  isSelectable
                   isSelected={formData.priority === 'high'}
                   data-test="priority-high"
-                />
+                >
+                  <CardBody>High</CardBody>
+                </Card>
               </FlexItem>
               <FlexItem span={3}>
-                <Tile
-                  title="Medium"
+                <Card
                   onClick={() => handleFieldChange('priority', 'medium')}
+                  isSelectable
                   isSelected={formData.priority === 'medium'}
                   data-test="priority-medium"
-                />
+                >
+                  <CardBody>Medium</CardBody>
+                </Card>
               </FlexItem>
               <FlexItem span={3}>
-                <Tile
-                  title="Low"
+                <Card
                   onClick={() => handleFieldChange('priority', 'low')}
+                  isSelectable
                   isSelected={formData.priority === 'low'}
                   data-test="priority-low"
-                />
+                >
+                  <CardBody>Low</CardBody>
+                </Card>
               </FlexItem>
             </Flex>
             <FormHelperText>
@@ -237,24 +246,26 @@ export const TodoModal: React.FC<TodoModalProps> = ({
             </FormHelperText>
           </FormGroup>
 
-          {/* Color - OPTIONAL - Using Tiles */}
+          {/* Color - OPTIONAL - Using Cards */}
           <FormGroup label="Color Label" fieldId="todo-color">
             <Flex>
               {(['red', 'orange', 'blue', 'green', 'purple', 'gray'] as const).map(color => (
                 <FlexItem key={color} span={2}>
-                  <Tile
-                    title={COLOR_TOKENS[color].label}
+                  <Card
                     onClick={() => handleFieldChange('color', color)}
+                    isSelectable
                     isSelected={formData.color === color}
                     data-test={`color-${color}`}
                     style={{
                       backgroundColor: formData.color === color
                         ? COLOR_TOKENS[color].background
                         : 'transparent',
-                      border: `var(--pf-v5-global--BorderWidth--sm) solid ${COLOR_TOKENS[color].background}`,
+                      border: `var(--pf-t--global--border--width--regular) solid ${COLOR_TOKENS[color].background}`,
                       color: formData.color === color ? '#ffffff' : COLOR_TOKENS[color].background
                     }}
-                  />
+                  >
+                    <CardBody>{COLOR_TOKENS[color].label}</CardBody>
+                  </Card>
                 </FlexItem>
               ))}
             </Flex>
@@ -281,9 +292,9 @@ export const TodoModal: React.FC<TodoModalProps> = ({
             </FormHelperText>
           </FormGroup>
         </Form>
-      </div>
+      </ModalBody>
 
-      <div className="todo-modal__footer">
+      <ModalFooter>
         <ActionGroup>
           <Button
             variant="primary"
@@ -295,11 +306,8 @@ export const TodoModal: React.FC<TodoModalProps> = ({
           <Button variant="secondary" onClick={onClose}>
             Cancel
           </Button>
-          <Button variant="link" onClick={handleReset} isInline>
-            Reset
-          </Button>
         </ActionGroup>
-      </div>
+      </ModalFooter>
     </Modal>
   );
 };

@@ -2,15 +2,14 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Masthead,
   MastheadMain,
-  MastheadBrand,
+  MastheadLogo, MastheadBrand,
   MastheadContent,
   Toolbar,
   ToolbarContent,
   ToolbarItem,
   Button,
-  Text,
-  TextContent,
-  TextVariants
+  Content,
+  ContentVariants
 } from '@patternfly/react-core';
 import './AppNav.scss';
 
@@ -24,13 +23,13 @@ export const AppNav: React.FC = () => {
   return (
     <Masthead className="app-nav">
       <MastheadMain>
-        <MastheadBrand>
-          <TextContent>
-            <Text component={TextVariants.h1} className="app-nav__title">
+        <MastheadBrand><MastheadLogo>
+          <Content>
+            <Content component={ContentVariants.h1} className="app-nav__title">
               TODO Application
-            </Text>
-          </TextContent>
-        </MastheadBrand>
+            </Content>
+          </Content>
+        </MastheadLogo></MastheadBrand>
       </MastheadMain>
       <MastheadContent>
         <Toolbar id="app-nav-toolbar">

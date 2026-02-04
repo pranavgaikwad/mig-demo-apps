@@ -8,7 +8,7 @@ export class DeleteModal {
   readonly todoTitleText: Locator;
 
   constructor(private page: Page) {
-    this.modal = page.locator('.pf-v5-c-modal-box').filter({ hasText: 'Delete TODO' });
+    this.modal = page.locator('.pf-v6-c-modal-box').filter({ hasText: 'Delete TODO' });
     this.modalTitle = page.locator('[data-test-id="delete-modal-title"]');
     this.deleteButton = page.getByRole('button', { name: 'Delete' });
     this.cancelButton = page.getByRole('button', { name: 'Cancel' });

@@ -1,23 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
-  Modal,
-  Button,
-  Text,
-  TextContent,
-  TextVariants,
-  Form,
-  FormGroup,
-  TextInput,
-  TextArea,
-  DatePicker,
-  Tile,
-  Flex,
-  FlexItem,
-  FormHelperText,
-  HelperText,
-  HelperTextItem,
-  ActionGroup
+	Button,
+	Content,
+	ContentVariants,
+	Form,
+	FormGroup,
+	TextInput,
+	TextArea,
+	DatePicker,
+	Flex,
+	FlexItem,
+	FormHelperText,
+	HelperText,
+	HelperTextItem,
+	ActionGroup
 } from '@patternfly/react-core';
+import {
+	Tile,
+	Modal
+} from '@patternfly/react-core/deprecated';
 import type { Todo, TodoFormData } from '../../types/todo';
 import { COLOR_TOKENS } from '../../utils/colorUtils';
 import { isValidDate, convertToMMDDYYYY } from '../../utils/dateUtils';
@@ -49,6 +50,18 @@ export const TodoModal: React.FC<TodoModalProps> = ({
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
+  const handleReset = useCallback(() => {
+    setFormData({
+      title: '',
+      description: '',
+      targetDate: '',
+      priority: undefined,
+      color: undefined,
+      tagsString: ''
+    });
+    setErrors({});
+  }, []);
+
   useEffect(() => {
     if (todo) {
       setFormData({
@@ -62,9 +75,9 @@ export const TodoModal: React.FC<TodoModalProps> = ({
     } else {
       handleReset();
     }
-  }, [todo, isOpen]);
+  }, [todo, isOpen, handleReset]);
 
-  const handleFieldChange = (field: keyof TodoFormData, value: any) => {
+  const handleFieldChange = (field: keyof TodoFormData, value: TodoFormData[keyof TodoFormData]) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
@@ -122,18 +135,6 @@ export const TodoModal: React.FC<TodoModalProps> = ({
     onClose();
   };
 
-  const handleReset = () => {
-    setFormData({
-      title: '',
-      description: '',
-      targetDate: '',
-      priority: undefined,
-      color: undefined,
-      tagsString: ''
-    });
-    setErrors({});
-  };
-
   const handleDateChange = (value: string) => {
     // DatePicker may return different formats, normalize to MM/DD/YYYY
     const normalizedDate = convertToMMDDYYYY(value);
@@ -143,11 +144,11 @@ export const TodoModal: React.FC<TodoModalProps> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="todo-modal__header">
-        <TextContent>
-          <Text component={TextVariants.h1} data-test-id="modal-title">
+        <Content>
+          <Content component={ContentVariants.h1} data-test-id="modal-title">
             {isEdit ? 'Edit TODO' : 'Create New TODO'}
-          </Text>
-        </TextContent>
+          </Content>
+        </Content>
       </div>
 
       <div className="todo-modal__body">
@@ -251,7 +252,7 @@ export const TodoModal: React.FC<TodoModalProps> = ({
                       backgroundColor: formData.color === color
                         ? COLOR_TOKENS[color].background
                         : 'transparent',
-                      border: `var(--pf-v5-global--BorderWidth--sm) solid ${COLOR_TOKENS[color].background}`,
+                      border: `var(--pf-t--global--border--width--regular) solid ${COLOR_TOKENS[color].background}`,
                       color: formData.color === color ? '#ffffff' : COLOR_TOKENS[color].background
                     }}
                   />

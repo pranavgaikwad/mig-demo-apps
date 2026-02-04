@@ -1,21 +1,21 @@
 .app-container {
   min-height: 100vh;
-  background-color: var(--pf-v5-global--BackgroundColor--100);
+  background-color: var(--pf-t--global--background--color--primary--default);
 }
 
 // Global overrides for PatternFly components
-.pf-v5-c-page {
-  background-color: var(--pf-v5-global--BackgroundColor--100);
+.pf-v6-c-page {
+  background-color: var(--pf-t--global--background--color--primary--default);
 }
 
-// Pixel breakpoints for migration testing
-@media (max-width: 767px) {
+// Breakpoints using rem units for PF6
+@media (max-width: 47.9375rem) {
   .app-container {
-    padding: var(--pf-v5-global--spacer--sm);
+    padding: var(--pf-t--global--spacer--sm);
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .app-container {
     padding: 0;
   }

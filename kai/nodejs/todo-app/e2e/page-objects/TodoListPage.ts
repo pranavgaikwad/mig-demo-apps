@@ -17,7 +17,7 @@ export class TodoListPage extends BasePage {
     this.colorDropdown = page.getByRole('button', { name: /Color:/ });
     this.overdueSwitch = page.locator('#show-overdue-toggle');
     // Clear button is the last button in the filter flex container
-    this.clearFiltersButton = page.locator('.pf-v5-l-flex').filter({ has: page.locator('#show-overdue-toggle') }).locator('button').last();
+    this.clearFiltersButton = page.locator('.pf-v6-l-flex').filter({ has: page.locator('#show-overdue-toggle') }).locator('button').last();
     this.table = page.locator('table[aria-label="TODO list"]');
     this.emptyState = page.locator('text=No todos found');
   }

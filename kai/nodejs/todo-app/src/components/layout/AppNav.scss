@@ -1,21 +1,22 @@
 .app-nav {
-  background-color: var(--pf-v5-global--BackgroundColor--dark-100);
-  border-bottom: var(--pf-v5-global--BorderWidth--sm) solid
-    var(--pf-v5-global--BorderColor--100);
+  // Dark masthead background matching original PF5 dark-100
+  background-color: #151515;
+  border-bottom: var(--pf-t--global--border--width--regular) solid
+    var(--pf-t--global--border--color--default);
 
   &__title {
-    color: var(--pf-v5-global--Color--light-100);
-    font-size: var(--pf-v5-global--FontSize--xl);
-    font-weight: var(--pf-v5-global--FontWeight--bold);
+    color: #ffffff;
+    font-size: var(--pf-t--global--font--size--xl);
+    font-weight: var(--pf-t--global--font--weight--bold);
     margin: 0;
   }
 }
 
-// Pixel breakpoints for migration testing
-@media (max-width: 767px) {
+// Breakpoints using rem units for PF6
+@media (max-width: 47.9375rem) {
   .app-nav {
     &__title {
-      font-size: var(--pf-v5-global--FontSize--lg);
+      font-size: var(--pf-t--global--font--size--lg);
     }
   }
 }

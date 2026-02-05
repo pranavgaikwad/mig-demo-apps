@@ -1,29 +1,29 @@
 .dashboard {
   &__header {
-    padding: var(--pf-v5-global--spacer--md);
-    border-bottom: var(--pf-v5-global--BorderWidth--sm) solid
-      var(--pf-v5-global--BorderColor--100);
+    padding: var(--pf-t--global--spacer--md);
+    border-bottom: var(--pf-t--global--border--width--regular) solid
+      var(--pf-t--global--border--color--default);
   }
 
   &__stats-card {
     text-align: center;
 
     .stat-number {
-      font-size: var(--pf-v5-global--FontSize--4xl);
-      font-weight: var(--pf-v5-global--FontWeight--bold);
+      font-size: var(--pf-t--global--font--size--heading--h1);
+      font-weight: var(--pf-t--global--font--weight--body--bold);
     }
   }
 
   &__overdue-section {
-    margin-top: var(--pf-v5-global--spacer--lg);
+    margin-top: var(--pf-t--global--spacer--lg);
   }
 }
 
 .overdue-todo-item {
-  border-left: var(--pf-v5-global--BorderWidth--lg) solid
-    var(--pf-v5-global--danger-color--100);
-  padding-left: var(--pf-v5-global--spacer--sm);
-  margin-bottom: var(--pf-v5-global--spacer--sm);
+  border-left: var(--pf-t--global--border--width--strong) solid
+    var(--pf-t--global--danger-color--100);
+  padding-left: var(--pf-t--global--spacer--sm);
+  margin-bottom: var(--pf-t--global--spacer--sm);
   background-color: rgba(201, 25, 11, 0.05);
 }
 
@@ -39,8 +39,8 @@
 @media (max-width: 767px) {
   .dashboard {
     &__header {
-      border-top: var(--pf-v5-global--BorderWidth--sm) solid
-        var(--pf-v5-global--BorderColor--100);
+      border-top: var(--pf-t--global--border--width--regular) solid
+        var(--pf-t--global--border--color--default);
     }
   }
 }

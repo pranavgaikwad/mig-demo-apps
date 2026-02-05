@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { DashboardPage } from '../../page-objects/DashboardPage';
 import { LocalStorageHelper } from '../../utils/localStorage';
 import { createTestTodo } from '../../fixtures/todos';
-import { getPastDate, getTodayDate } from '../../utils/test-helpers';
+import { getPastDate } from '../../utils/test-helpers';
 
 test.describe('Dashboard Statistics', () => {
   let dashboardPage: DashboardPage;

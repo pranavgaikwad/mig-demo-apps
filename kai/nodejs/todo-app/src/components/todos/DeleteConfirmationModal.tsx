@@ -1,4 +1,12 @@
-import { Modal, Button, Text, TextContent, TextVariants } from '@patternfly/react-core';
+import {
+	Button,
+	Content,
+	ContentVariants,
+	Modal,
+	ModalHeader,
+	ModalBody,
+	ModalFooter
+} from '@patternfly/react-core';
 import './DeleteConfirmationModal.scss';
 
 interface DeleteConfirmationModalProps {
@@ -16,35 +24,29 @@ export const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = (
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <div className="delete-modal__header">
-        <TextContent>
-          <Text component={TextVariants.h1} data-test-id="delete-modal-title">
-            Delete TODO
-          </Text>
-        </TextContent>
-      </div>
-
-      <div className="delete-modal__body">
-        <TextContent>
-          <Text>
+      <ModalHeader title="Delete TODO" data-test-id="delete-modal-title" />
+      
+      <ModalBody>
+        <Content>
+          <Content component="p">
             Are you sure you want to delete this TODO?
             {todoTitle && (
-              <Text component={TextVariants.p}>
+              <Content component={ContentVariants.p}>
                 <strong>{todoTitle}</strong>
-              </Text>
+              </Content>
             )}
-          </Text>
-        </TextContent>
-      </div>
+          </Content>
+        </Content>
+      </ModalBody>
 
-      <div className="delete-modal__footer">
+      <ModalFooter>
         <Button variant="danger" onClick={onConfirm}>
           Delete
         </Button>
         <Button variant="secondary" onClick={onClose}>
           Cancel
         </Button>
-      </div>
+      </ModalFooter>
     </Modal>
   );
 };

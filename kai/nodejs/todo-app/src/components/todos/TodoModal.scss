@@ -1,25 +1,5 @@
-.todo-modal {
-  &__header {
-    padding: var(--pf-v5-global--spacer--md);
-    border-bottom: var(--pf-v5-global--BorderWidth--sm) solid
-      var(--pf-v5-global--BorderColor--100);
-  }
-
-  &__body {
-    padding: var(--pf-v5-global--spacer--md);
-    max-height: 70vh;
-    overflow-y: auto;
-  }
-
-  &__footer {
-    padding: var(--pf-v5-global--spacer--md);
-    border-top: var(--pf-v5-global--BorderWidth--sm) solid
-      var(--pf-v5-global--BorderColor--100);
-  }
-}
-
 // Tile styling for priority and color selection
-.pf-v5-c-tile {
+.pf-v6-c-tile {
   cursor: pointer;
   transition: all 0.2s ease;
 
@@ -28,6 +8,6 @@
   }
 
   &.pf-m-selected {
-    border-color: var(--pf-v5-global--active-color--100);
+    border-color: var(--pf-t--global--active-color--100);
   }
 }
